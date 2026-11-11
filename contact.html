@@ -58,10 +58,12 @@
 
     /* Header Navigation */
     header {
-      padding: 50px 8%;
+      padding: 40px 8%;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: relative;
+      z-index: 100;
     }
 
     .brand-logo {
@@ -73,18 +75,43 @@
       text-decoration: none;
     }
 
+    nav {
+      display: flex;
+      gap: 36px;
+    }
+
     nav a {
       font-family: 'Cormorant Garamond', serif;
       text-decoration: none;
       color: #6b6f6d;
       font-size: 0.95rem;
       letter-spacing: 0.22em;
-      margin-left: 36px;
       transition: color 0.3s ease;
     }
 
     nav a:hover, nav a.active {
       color: #2b2f2d;
+    }
+
+    /* ハンバーガーボタン（初期は非表示） */
+    .hamburger-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 24px;
+      height: 16px;
+      padding: 0;
+      z-index: 101;
+    }
+
+    .hamburger-btn span {
+      width: 100%;
+      height: 1px;
+      background-color: #2b2f2d;
+      transition: transform 0.4s ease, opacity 0.4s ease;
     }
 
     /* MAIN CONTACT SECTION */
@@ -123,7 +150,7 @@
       display: grid;
       grid-template-columns: 1fr 1.3fr;
       gap: 60px;
-      align-items: top;
+      align-items: flex-start;
     }
 
     .contact-info {
@@ -162,7 +189,7 @@
       color: #3b3f3d;
     }
 
-    /* FORM CARD - 背景ぼかしとアーチ角の統一 */
+    /* FORM CARD */
     .form-card {
       background: rgba(255, 255, 255, 0.75);
       backdrop-filter: blur(16px);
@@ -262,13 +289,78 @@
       color: #929694;
     }
 
+    /* --- RESPONSIVE (スマホ対応) --- */
     @media (max-width: 768px) {
+      header {
+        padding: 30px 6%;
+      }
+
+      .hamburger-btn {
+        display: flex;
+      }
+
+      .hamburger-btn.active span:nth-child(1) {
+        transform: translateY(7.5px) rotate(45deg);
+      }
+      .hamburger-btn.active span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger-btn.active span:nth-child(3) {
+        transform: translateY(-7.5px) rotate(-45deg);
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(246, 244, 239, 0.98);
+        backdrop-filter: blur(12px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 36px;
+        margin-left: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s ease, visibility 0.4s ease;
+        z-index: 99;
+      }
+
+      nav.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      nav a {
+        font-size: 1.1rem;
+        letter-spacing: 0.3em;
+      }
+
+      .contact-section {
+        padding: 20px 6% 100px;
+      }
+
+      .main-title {
+        font-size: 2.2rem;
+      }
+
+      .contact-header {
+        margin-bottom: 40px;
+      }
+
       .contact-layout {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 50px;
       }
+
+      .contact-info {
+        padding-right: 0;
+      }
+
       .form-card {
-        padding: 35px 25px;
+        padding: 35px 24px;
         border-radius: 60px 16px 16px 16px;
       }
     }
@@ -283,6 +375,13 @@
 
   <header>
     <a href="index.html" class="brand-logo">L ' A U R A</a>
+    
+    <button class="hamburger-btn" aria-label="メニューを開く">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
     <nav>
       <a href="index.html#philosophy">PHILOSOPHY</a>
       <a href="index.html#collection">COLLECTION</a>
@@ -361,6 +460,28 @@
     <div class="footer-logo">L ' A U R A</div>
     <p class="footer-copy">&copy; 2026 L'AURA ORGANIC BOTANICALS. ALL RIGHTS RESERVED.</p>
   </footer>
+
+  <script>
+    const hamburgerBtn = document.querySelector('.hamburger-btn');
+    const siteNav = document.querySelector('nav');
+    const navLinks = document.querySelectorAll('nav a');
+
+    if (hamburgerBtn) {
+      hamburgerBtn.addEventListener('click', () => {
+        hamburgerBtn.classList.toggle('active');
+        siteNav.classList.toggle('active');
+      });
+    }
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (hamburgerBtn) {
+          hamburgerBtn.classList.remove('active');
+          siteNav.classList.remove('active');
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>

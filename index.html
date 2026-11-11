@@ -62,6 +62,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: relative;
+      z-index: 100;
     }
 
     .brand-logo {
@@ -73,16 +75,45 @@
       text-decoration: none;
     }
 
+    nav {
+      display: flex;
+      gap: 36px;
+    }
+
     nav a {
       font-family: 'Cormorant Garamond', serif;
       text-decoration: none;
       color: #6b6f6d;
       font-size: 0.95rem;
       letter-spacing: 0.22em;
-      margin-left: 36px;
+      transition: color 0.3s ease;
     }
 
-    /* HERO: 非対称＆写真の上にカードを重ねる崩し */
+    nav a:hover, nav a.active {
+      color: #2b2f2d;
+    }
+
+    .hamburger-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 24px;
+      height: 16px;
+      padding: 0;
+      z-index: 101;
+    }
+
+    .hamburger-btn span {
+      width: 100%;
+      height: 1px;
+      background-color: #2b2f2d;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+
+    /* HERO */
     .hero {
       padding: 40px 8% 140px;
     }
@@ -121,7 +152,6 @@
       position: relative;
     }
 
-    /* アーチ状の不揃いな写真切り抜き */
     .hero-img-1 {
       width: 100%;
       height: 500px;
@@ -130,7 +160,6 @@
       box-shadow: 0 25px 50px rgba(0,0,0,0.04);
     }
 
-    /* 写真に少し重なる注釈カード */
     .overlap-note-card {
       position: absolute;
       bottom: -40px;
@@ -159,7 +188,7 @@
       letter-spacing: 0.1em;
     }
 
-    /* COLLECTION: 段違い（Staggered）レイアウト */
+    /* COLLECTION */
     .section-collection {
       padding: 120px 8%;
       background: linear-gradient(180deg, rgba(246,244,239,0) 0%, rgba(236,239,235,0.4) 50%, rgba(246,244,239,0) 100%);
@@ -186,7 +215,6 @@
       color: #242826;
     }
 
-    /* 均等ではなく高さをずらしたグリッド */
     .staggered-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -194,13 +222,11 @@
       align-items: flex-start;
     }
 
-    /* 1つ目：縦長のアーチ */
     .card-1 .item-img {
       height: 420px;
       border-radius: 160px 160px 12px 12px;
     }
 
-    /* 2つ目：あえて位置を90px下に落とす（段違い） */
     .card-2 {
       margin-top: 90px;
     }
@@ -209,7 +235,6 @@
       border-radius: 12px 160px 12px 12px;
     }
 
-    /* 3つ目：少し位置を下げて逆アーチ */
     .card-3 {
       margin-top: 30px;
     }
@@ -224,7 +249,6 @@
       box-shadow: 0 18px 36px rgba(0,0,0,0.03);
     }
 
-    /* 文字を写真の枠から被せるように重ねる */
     .item-text-overlap {
       background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(10px);
@@ -269,7 +293,7 @@
       letter-spacing: 0.08em;
     }
 
-    /* JOURNAL PREVIEW: 雑誌のような左右非対称エディトリアル */
+    /* JOURNAL PREVIEW */
     .section-journal-preview {
       padding: 120px 8% 160px;
     }
@@ -346,6 +370,105 @@
       letter-spacing: 0.2em;
       color: #929694;
     }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 768px) {
+      header {
+        padding: 30px 6%;
+      }
+
+      .hamburger-btn {
+        display: flex;
+      }
+
+      .hamburger-btn.active span:nth-child(1) {
+        transform: translateY(7.5px) rotate(45deg);
+      }
+      .hamburger-btn.active span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger-btn.active span:nth-child(3) {
+        transform: translateY(-7.5px) rotate(-45deg);
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(246, 244, 239, 0.98);
+        backdrop-filter: blur(12px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 36px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s ease, visibility 0.4s ease;
+        z-index: 99;
+      }
+
+      nav.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      nav a {
+        font-size: 1.1rem;
+        letter-spacing: 0.3em;
+      }
+
+      .hero {
+        padding: 20px 6% 80px;
+      }
+      .hero-main-title {
+        font-size: 2.2rem;
+        line-height: 1.5;
+      }
+      .hero-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .hero-desc {
+        margin-top: 20px;
+        margin-bottom: 24px;
+      }
+      .hero-img-1 {
+        height: 360px;
+        border-radius: 120px 12px 120px 12px;
+      }
+      .overlap-note-card {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        margin: -30px 16px 0 auto;
+        max-width: 85%;
+      }
+
+      .section-collection {
+        padding: 80px 6%;
+      }
+      .staggered-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+      .card-2, .card-3 {
+        margin-top: 0;
+      }
+
+      .section-journal-preview {
+        padding: 80px 6% 100px;
+      }
+      .journal-editorial {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+      .journal-big-img {
+        height: 320px;
+        border-radius: 16px 100px 16px 100px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -357,6 +480,13 @@
 
   <header>
     <a href="index.html" class="brand-logo">L ' A U R A</a>
+    
+    <button class="hamburger-btn" aria-label="メニューを開く">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
     <nav>
       <a href="index.html#philosophy">PHILOSOPHY</a>
       <a href="index.html#collection">COLLECTION</a>
@@ -392,7 +522,7 @@
       </div>
     </section>
 
-    <!-- COLLECTION: 段違い＆非対称フレーム -->
+    <!-- COLLECTION -->
     <section id="collection" class="section-collection">
       <div class="section-head">
         <span class="sub-title">ESSENTIAL COLLECTION</span>
@@ -400,7 +530,6 @@
       </div>
 
       <div class="staggered-grid">
-        <!-- 1つ目のプロダクト -->
         <div class="card-1">
           <img class="item-img" src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=600&q=80" alt="Hydrating Mist Water">
           <div class="item-text-overlap">
@@ -411,7 +540,6 @@
           </div>
         </div>
 
-        <!-- 2つ目のプロダクト（90px下に配置をずらす） -->
         <div class="card-2">
           <img class="item-img" src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=600&q=80" alt="Botanical Serum Oil">
           <div class="item-text-overlap">
@@ -422,7 +550,6 @@
           </div>
         </div>
 
-        <!-- 3つ目のプロダクト -->
         <div class="card-3">
           <img class="item-img" src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=600&q=80" alt="Restorative Silk Cream">
           <div class="item-text-overlap">
@@ -460,6 +587,28 @@
     <div class="footer-logo">L ' A U R A</div>
     <p class="footer-copy">&copy; 2026 L'AURA ORGANIC BOTANICALS. ALL RIGHTS RESERVED.</p>
   </footer>
+
+  <script>
+    const hamburgerBtn = document.querySelector('.hamburger-btn');
+    const siteNav = document.querySelector('nav');
+    const navLinks = document.querySelectorAll('nav a');
+
+    if (hamburgerBtn) {
+      hamburgerBtn.addEventListener('click', () => {
+        hamburgerBtn.classList.toggle('active');
+        siteNav.classList.toggle('active');
+      });
+    }
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (hamburgerBtn) {
+          hamburgerBtn.classList.remove('active');
+          siteNav.classList.remove('active');
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
