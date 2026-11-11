@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CONTACT — L'AURA Organic Skincare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Serif+JP:wght@200;300;400&display=swap" rel="stylesheet">
+  
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f6f4ef;
+      color: #3b3f3d;
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 300;
+      line-height: 1.9;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* 背景の自然な光 */
+    .bg-orbs {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .orb-1 {
+      position: absolute;
+      top: -10%;
+      right: -10%;
+      width: 60vw;
+      height: 60vw;
+      background: radial-gradient(circle, rgba(215, 225, 215, 0.45) 0%, rgba(246, 244, 239, 0) 70%);
+      filter: blur(80px);
+    }
+
+    .orb-2 {
+      position: absolute;
+      top: 40%;
+      left: -15%;
+      width: 65vw;
+      height: 65vw;
+      background: radial-gradient(circle, rgba(238, 226, 218, 0.5) 0%, rgba(246, 244, 239, 0) 70%);
+      filter: blur(90px);
+    }
+
+    /* Header Navigation */
+    header {
+      padding: 50px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      letter-spacing: 0.35em;
+      color: #2b2f2d;
+      text-decoration: none;
+    }
+
+    nav a {
+      font-family: 'Cormorant Garamond', serif;
+      text-decoration: none;
+      color: #6b6f6d;
+      font-size: 0.95rem;
+      letter-spacing: 0.22em;
+      margin-left: 36px;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover, nav a.active {
+      color: #2b2f2d;
+    }
+
+    /* MAIN CONTACT SECTION */
+    .contact-section {
+      padding: 40px 8% 140px;
+    }
+
+    .contact-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .contact-header {
+      margin-bottom: 60px;
+    }
+
+    .sub-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.35em;
+      color: #828684;
+      display: block;
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+
+    .main-title {
+      font-size: 2.8rem;
+      font-weight: 200;
+      line-height: 1.45;
+      letter-spacing: 0.15em;
+      color: #222624;
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 60px;
+      align-items: top;
+    }
+
+    .contact-info {
+      padding-right: 20px;
+    }
+
+    .contact-desc {
+      font-size: 0.88rem;
+      line-height: 2.5;
+      color: #555957;
+      letter-spacing: 0.14em;
+      margin-bottom: 40px;
+    }
+
+    .info-list {
+      list-style: none;
+      margin-top: 30px;
+    }
+
+    .info-item {
+      margin-bottom: 24px;
+    }
+
+    .info-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      color: #7f9284;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .info-val {
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      color: #3b3f3d;
+    }
+
+    /* FORM CARD - 背景ぼかしとアーチ角の統一 */
+    .form-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(16px);
+      padding: 50px 45px;
+      border-radius: 120px 16px 16px 16px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.03);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .form-group {
+      margin-bottom: 32px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      color: #525654;
+      margin-bottom: 10px;
+    }
+
+    .form-label .req {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.75rem;
+      color: #8fa094;
+      margin-left: 8px;
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-select {
+      width: 100%;
+      background: rgba(246, 244, 239, 0.6);
+      border: 1px solid rgba(195, 200, 196, 0.5);
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 0.88rem;
+      color: #2f3331;
+      letter-spacing: 0.1em;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus,
+    .form-select:focus {
+      background: rgba(255, 255, 255, 0.9);
+      border-color: #8fa094;
+      box-shadow: 0 0 12px rgba(143, 160, 148, 0.15);
+    }
+
+    .form-textarea {
+      height: 140px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      display: inline-block;
+      width: 100%;
+      background: #3b3f3d;
+      color: #f6f4ef;
+      border: none;
+      border-radius: 30px;
+      padding: 16px 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.3em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .submit-btn:hover {
+      background: #555957;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+    }
+
+    /* Footer */
+    footer {
+      padding: 80px 8% 60px;
+      border-top: 1px solid rgba(195, 200, 196, 0.4);
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.3em;
+      color: #2f3331;
+      margin-bottom: 20px;
+    }
+
+    .footer-copy {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: #929694;
+    }
+
+    @media (max-width: 768px) {
+      .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .form-card {
+        padding: 35px 25px;
+        border-radius: 60px 16px 16px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-orbs">
+    <div class="orb-1"></div>
+    <div class="orb-2"></div>
+  </div>
+
+  <header>
+    <a href="index.html" class="brand-logo">L ' A U R A</a>
+    <nav>
+      <a href="index.html#philosophy">PHILOSOPHY</a>
+      <a href="index.html#collection">COLLECTION</a>
+      <a href="journal.html">JOURNAL</a>
+      <a href="contact.html" class="active">CONTACT</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="contact-section">
+      <div class="contact-container">
+        
+        <div class="contact-header">
+          <span class="sub-title">INQUIRY & DIALOGUE</span>
+          <h1 class="main-title">静かな対話を、<br>ここから。</h1>
+        </div>
+
+        <div class="contact-layout">
+          <div class="contact-info">
+            <p class="contact-desc">
+              プロダクトのご購入、成分やケア方法に関するご質問、メディア取材や取扱店舗に関するお問い合わせなど。<br>
+              私たちが心を込めてお答えいたします。
+            </p>
+
+            <ul class="info-list">
+              <li class="info-item">
+                <span class="info-label">OPEN HOURS</span>
+                <p class="info-val">Mon — Fri / 10:00 - 17:00</p>
+              </li>
+              <li class="info-item">
+                <span class="info-label">PRESS & MEDIA</span>
+                <p class="info-val">press@laura-botanicals.jp</p>
+              </li>
+            </ul>
+          </div>
+
+          <div class="form-card">
+            <form action="#" method="post">
+              
+              <div class="form-group">
+                <label class="form-label">お問合せ種別<span class="req">* REQUIRED</span></label>
+                <select class="form-select" required>
+                  <option value="">選択してください</option>
+                  <option value="product">プロダクト・お手入れに関するご相談</option>
+                  <option value="order">ご注文・配送に関するお問合せ</option>
+                  <option value="press">取材・プレス・お取扱について</option>
+                  <option value="other">その他のお問合せ</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">お名前<span class="req">* REQUIRED</span></label>
+                <input type="text" class="form-input" placeholder="山田 葵" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">メールアドレス<span class="req">* REQUIRED</span></label>
+                <input type="email" class="form-input" placeholder="hello@example.com" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">お問合せ内容<span class="req">* REQUIRED</span></label>
+                <textarea class="form-textarea" placeholder="メッセージをご入力ください..." required></textarea>
+              </div>
+
+              <button type="submit" class="submit-btn">SEND MESSAGE —</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-logo">L ' A U R A</div>
+    <p class="footer-copy">&copy; 2026 L'AURA ORGANIC BOTANICALS. ALL RIGHTS RESERVED.</p>
+  </footer>
+
+</body>
+</html>

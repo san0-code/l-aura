@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L'AURA — Organic Skincare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Serif+JP:wght@200;300;400&display=swap" rel="stylesheet">
+  
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f6f4ef;
+      color: #3b3f3d;
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 300;
+      line-height: 1.9;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* 背景の自然な光 */
+    .bg-orbs {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .orb-1 {
+      position: absolute;
+      top: -10%;
+      right: -10%;
+      width: 60vw;
+      height: 60vw;
+      background: radial-gradient(circle, rgba(215, 225, 215, 0.45) 0%, rgba(246, 244, 239, 0) 70%);
+      filter: blur(80px);
+    }
+
+    .orb-2 {
+      position: absolute;
+      top: 40%;
+      left: -15%;
+      width: 65vw;
+      height: 65vw;
+      background: radial-gradient(circle, rgba(238, 226, 218, 0.5) 0%, rgba(246, 244, 239, 0) 70%);
+      filter: blur(90px);
+    }
+
+    /* Header Navigation */
+    header {
+      padding: 50px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      letter-spacing: 0.35em;
+      color: #2b2f2d;
+      text-decoration: none;
+    }
+
+    nav a {
+      font-family: 'Cormorant Garamond', serif;
+      text-decoration: none;
+      color: #6b6f6d;
+      font-size: 0.95rem;
+      letter-spacing: 0.22em;
+      margin-left: 36px;
+    }
+
+    /* HERO: 非対称＆写真の上にカードを重ねる崩し */
+    .hero {
+      padding: 40px 8% 140px;
+    }
+
+    .hero-container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hero-main-title {
+      font-size: 3.2rem;
+      font-weight: 200;
+      line-height: 1.45;
+      letter-spacing: 0.15em;
+      color: #222624;
+      margin-bottom: 28px;
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 60px;
+      align-items: top;
+    }
+
+    .hero-desc {
+      font-size: 0.88rem;
+      line-height: 2.5;
+      color: #555957;
+      letter-spacing: 0.14em;
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+
+    .hero-img-box {
+      position: relative;
+    }
+
+    /* アーチ状の不揃いな写真切り抜き */
+    .hero-img-1 {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      border-radius: 180px 12px 180px 12px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.04);
+    }
+
+    /* 写真に少し重なる注釈カード */
+    .overlap-note-card {
+      position: absolute;
+      bottom: -40px;
+      left: -50px;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      padding: 28px 32px;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+      max-width: 280px;
+    }
+
+    .note-tag {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      color: #7f9284;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .note-text {
+      font-size: 0.8rem;
+      line-height: 2;
+      color: #4a4e4c;
+      letter-spacing: 0.1em;
+    }
+
+    /* COLLECTION: 段違い（Staggered）レイアウト */
+    .section-collection {
+      padding: 120px 8%;
+      background: linear-gradient(180deg, rgba(246,244,239,0) 0%, rgba(236,239,235,0.4) 50%, rgba(246,244,239,0) 100%);
+    }
+
+    .section-head {
+      margin-bottom: 80px;
+    }
+
+    .sub-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.35em;
+      color: #828684;
+      display: block;
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+
+    .main-sec-title {
+      font-size: 2.2rem;
+      font-weight: 200;
+      letter-spacing: 0.18em;
+      color: #242826;
+    }
+
+    /* 均等ではなく高さをずらしたグリッド */
+    .staggered-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      align-items: flex-start;
+    }
+
+    /* 1つ目：縦長のアーチ */
+    .card-1 .item-img {
+      height: 420px;
+      border-radius: 160px 160px 12px 12px;
+    }
+
+    /* 2つ目：あえて位置を90px下に落とす（段違い） */
+    .card-2 {
+      margin-top: 90px;
+    }
+    .card-2 .item-img {
+      height: 320px;
+      border-radius: 12px 160px 12px 12px;
+    }
+
+    /* 3つ目：少し位置を下げて逆アーチ */
+    .card-3 {
+      margin-top: 30px;
+    }
+    .card-3 .item-img {
+      height: 460px;
+      border-radius: 12px 12px 160px 160px;
+    }
+
+    .item-img {
+      width: 100%;
+      object-fit: cover;
+      box-shadow: 0 18px 36px rgba(0,0,0,0.03);
+    }
+
+    /* 文字を写真の枠から被せるように重ねる */
+    .item-text-overlap {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      padding: 24px;
+      margin-top: -35px;
+      margin-left: 20px;
+      margin-right: -10px;
+      border-radius: 12px;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.02);
+    }
+
+    .item-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      color: #8c908e;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .item-title-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      letter-spacing: 0.12em;
+      color: #292d2b;
+      margin-bottom: 4px;
+    }
+
+    .item-title-ja {
+      font-size: 0.78rem;
+      color: #626664;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .item-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      color: #3b3f3d;
+      letter-spacing: 0.08em;
+    }
+
+    /* JOURNAL PREVIEW: 雑誌のような左右非対称エディトリアル */
+    .section-journal-preview {
+      padding: 120px 8% 160px;
+    }
+
+    .journal-editorial {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-top: 60px;
+    }
+
+    .journal-big-img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      border-radius: 16px 180px 16px 180px;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.04);
+    }
+
+    .journal-tag {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.3em;
+      color: #7d9082;
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .journal-story-title {
+      font-size: 1.7rem;
+      font-weight: 200;
+      line-height: 1.6;
+      letter-spacing: 0.14em;
+      color: #242826;
+      margin-bottom: 24px;
+    }
+
+    .journal-story-excerpt {
+      font-size: 0.86rem;
+      line-height: 2.4;
+      color: #585c5a;
+      letter-spacing: 0.12em;
+      margin-bottom: 36px;
+    }
+
+    .link-arrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.88rem;
+      letter-spacing: 0.25em;
+      color: #2b2f2d;
+      text-decoration: none;
+      border-bottom: 1px solid #2b2f2d;
+      padding-bottom: 4px;
+    }
+
+    /* Footer */
+    footer {
+      padding: 80px 8% 60px;
+      border-top: 1px solid rgba(195, 200, 196, 0.4);
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.3em;
+      color: #2f3331;
+      margin-bottom: 20px;
+    }
+
+    .footer-copy {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: #929694;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-orbs">
+    <div class="orb-1"></div>
+    <div class="orb-2"></div>
+  </div>
+
+  <header>
+    <a href="index.html" class="brand-logo">L ' A U R A</a>
+    <nav>
+      <a href="index.html#philosophy">PHILOSOPHY</a>
+      <a href="index.html#collection">COLLECTION</a>
+      <a href="journal.html">JOURNAL</a>
+      <a href="contact.html">CONTACT</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-container">
+        <h1 class="hero-main-title">肌が、静けさを<br>思い出す時間。</h1>
+
+        <div class="hero-layout">
+          <div>
+            <p class="hero-desc">
+              植物の生命力が満ちる朝露の刻に採集された極上のエキス。<br>
+              過剰なものをそっと手放し、水のように深く溶け込む。<br>
+              肌本来の透明感と、呼吸を取り戻すためのボタニカルケア。
+            </p>
+            <a href="journal.html" class="link-arrow">READ STORIES —</a>
+          </div>
+
+          <div class="hero-img-box">
+            <img class="hero-img-1" src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=800&q=80" alt="Botanical Leaf and Water">
+            <div class="overlap-note-card">
+              <span class="note-tag">100% PURE EXTRACT</span>
+              <p class="note-text">水蒸気蒸留法によって、一滴一滴時間をかけて抽出された原液。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLLECTION: 段違い＆非対称フレーム -->
+    <section id="collection" class="section-collection">
+      <div class="section-head">
+        <span class="sub-title">ESSENTIAL COLLECTION</span>
+        <h2 class="main-sec-title">整える、3つのダイアログ</h2>
+      </div>
+
+      <div class="staggered-grid">
+        <!-- 1つ目のプロダクト -->
+        <div class="card-1">
+          <img class="item-img" src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=600&q=80" alt="Hydrating Mist Water">
+          <div class="item-text-overlap">
+            <span class="item-num">01 / TONER</span>
+            <h3 class="item-title-en">Hydrating Mist Water</h3>
+            <p class="item-title-ja">ハイドレイティング ミスト</p>
+            <p class="item-price">¥ 5,800</p>
+          </div>
+        </div>
+
+        <!-- 2つ目のプロダクト（90px下に配置をずらす） -->
+        <div class="card-2">
+          <img class="item-img" src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=600&q=80" alt="Botanical Serum Oil">
+          <div class="item-text-overlap">
+            <span class="item-num">02 / SERUM</span>
+            <h3 class="item-title-en">Botanical Serum Oil</h3>
+            <p class="item-title-ja">ボタニカル セラムオイル</p>
+            <p class="item-price">¥ 8,500</p>
+          </div>
+        </div>
+
+        <!-- 3つ目のプロダクト -->
+        <div class="card-3">
+          <img class="item-img" src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=600&q=80" alt="Restorative Silk Cream">
+          <div class="item-text-overlap">
+            <span class="item-num">03 / CREAM</span>
+            <h3 class="item-title-en">Restorative Silk Cream</h3>
+            <p class="item-title-ja">レストラティブ シルククリーム</p>
+            <p class="item-price">¥ 9,200</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JOURNAL PREVIEW -->
+    <section class="section-journal-preview">
+      <div class="section-head">
+        <span class="sub-title">FROM OUR JOURNAL</span>
+        <h2 class="main-sec-title">言葉と、物語。</h2>
+      </div>
+
+      <div class="journal-editorial">
+        <img class="journal-big-img" src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=800&q=80" alt="朝露のハーブ園">
+        <div>
+          <span class="journal-tag">FEATURED STORY</span>
+          <h3 class="journal-story-title">朝露のハーブ園を訪ねて。<br>無農薬有機栽培の現場から</h3>
+          <p class="journal-story-excerpt">
+            標高1,200mの高原にある契約農園。太陽が昇る直前、植物たちが一番生命力を蓄える「朝露の刻」に手摘みされるハーブの香りと、職人たちの静かな手仕事を取材しました。
+          </p>
+          <a href="journal.html" class="link-arrow">READ FULL STORY —</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-logo">L ' A U R A</div>
+    <p class="footer-copy">&copy; 2026 L'AURA ORGANIC BOTANICALS. ALL RIGHTS RESERVED.</p>
+  </footer>
+
+</body>
+</html>
